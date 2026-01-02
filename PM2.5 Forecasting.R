@@ -215,55 +215,6 @@ ggAcf(rr, main = "ACF of Squared Residuals",lag.max=250)
 ggPacf(rr, main = "ACF of Squared Residuals",lag.max=250)
 ArchTest(rr) #p value 0.97 no arch effect present there is homoscedasticity
 
-#12 minimum MSE
-#plot(train_ts)
-
-#ses_forecast1=ses(train_ts,h=length(test_ts),alpha = 0.2,initial = "simple")
-#ses_forecast2=ses(train_ts,h=length(test_ts),alpha = 0.4,initial = "simple")
-#ses_forecast3=ses(train_ts,h=length(test_ts),alpha = 0.6,initial = "simple")
-#summary(ses_forecast1)
-#summary(ses_forecast2)
-#summary(ses_forecast3)
-#ses_forecast1$mean
-#ses_forecast2$mean
-#ses_forecast3$mean
-#autoplot(ses_forecast1,main="SES forecast with alpha=0.2")+theme_minimal()
-#autoplot(ses_forecast2,main="SES forecast with alpha=0.2")+theme_minimal()
-#autoplot(ses_forecast3,main="SES forecast with alpha=0.2")+theme_minimal()
-#autoplot(train_ts,main="SES Models with different alpha") +autolayer(fitted(ses_forecast1), series="alpha=0.2")+autolayer(fitted(ses_forecast2), series="alpha=0.4") +autolayer(fitted(ses_forecast3), series="alpha=0.6")+theme_minimal()
-#autoplot(train_ts)+autolayer(ses_forecast1,PI=F,series="alpha=0.2")+autolayer(ses_forecast2, PI=F,series="alpha=0.4") +autolayer(ses_forecast3, PI=F,series="alpha=0.6")+autolayer(test_ts,series="actual",color="black")+ggtitle("Forecast from SES'S")+theme_minimal()
-#par(mfrow=c(1,2))
-#ts.plot(train_ts)
-#lines(fitted(ses_forecast1), col="blue", type="o") 
-#lines(fitted(ses_forecast2), col="red", type="o")
-#lines(fitted(ses_forecast3), col="green", type="o")
-#ts.plot(test_ts)
-#lines(ses_forecast1$mean, col="blue", type="o")
-#lines(ses_forecast2$mean, col="red", type="o")
-#lines(ses_forecast3$mean, col="green", type="o")
-#legend("topright",lty=1, col=c(1,"blue","red","green"), 
-#       c("data", expression(alpha == 0.2), expression(alpha == 0.4),
-#         expression(alpha == 0.6)),pch=1)
-#
-#accuracy(ses_forecast1, test_ts)
-#accuracy(ses_forecast2 , test_ts)#ses a=0.4
-#accuracy(ses_forecast3, test_ts) #ses a=0.6 both look good has good MAPE RMSE
-#
-#
-
-##I WONT DO HOLT EXPO SMOOTHING CAUSE I HAVE NO TREND
-#
-#HOLT WINTER DOESNT WORK HOCAM, WEEKLY DATA DOES NOT ALLOW FOR MODEL CREATION 
-
-#autoplot(decompose(train_ts))
-#fit.hw<-hw(train_ts, h=length(test_ts), seasonal="additive")
-#fit.hw<-hw(train_ts, h=1, seasonal="additive")
-#fit.hw<-hw(train_ts, h=1, seasonal="multiplicative")
-#fit.hw$model
-
-#I DONT THINK ETS IS GONNA LOOK GOOD CAUSE IT IGNORES THE SEASONALITY BECAUSE OF THE FREQUENCY
-
-
 #ets
 library(forecast)
 ETS1 <- ets(train_ts)
@@ -411,4 +362,5 @@ accuracy(tail(forecast$yhat,53),test_ts) #initial prophet model
 accuracy(tail(forecastt$yhat,53),test_ts) #hyperparameter tuned model, the best model
 accuracy(tbats_forecast,test_ts)
 accuracy(nnforecast,test_ts)
+
 
